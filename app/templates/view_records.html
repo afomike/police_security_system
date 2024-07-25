@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}View Records{% endblock %}
+{% block content %}
+<h2>Police Records</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Officer Name</th>
+        <th>Rank</th>
+        <th>Station</th>
+        <th>Contact</th>
+    </tr>
+    {% for record in records %}
+    <tr>
+        <td>{{ record.id }}</td>
+        <td>{{ record.officer_name }}</td>
+        <td>{{ record.rank }}</td>
+        <td>{{ record.station }}</td>
+        <td>{{ record.contact }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

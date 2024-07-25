@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Add Record{% endblock %}
+{% block content %}
+<h2>Add Police Record</h2>
+<form method="POST" action="{{ url_for('add_record') }}">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.officer_name.label }}<br>
+        {{ form.officer_name(size=32) }}<br>
+        {{ form.rank.label }}<br>
+        {{ form.rank(size=32) }}<br>
+        {{ form.station.label }}<br>
+        {{ form.station(size=32) }}<br>
+        {{ form.contact.label }}<br>
+        {{ form.contact(size=32) }}<br>
+        {{ form.submit() }}
+    </p>
+</form>
+{% endblock %}

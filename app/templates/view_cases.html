@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}View Cases{% endblock %}
+{% block content %}
+<h2>Cases</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Case Title</th>
+        <th>Case Description</th>
+        <th>Officer ID</th>
+        <th>Date Posted</th>
+    </tr>
+    {% for case in cases %}
+    <tr>
+        <td>{{ case.id }}</td>
+        <td>{{ case.case_title }}</td>
+        <td>{{ case.case_description }}</td>
+        <td>{{ case.officer_id }}</td>
+        <td>{{ case.date_posted }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Add Case{% endblock %}
+{% block content %}
+<h2>Add Case</h2>
+<form method="POST" action="{{ url_for('add_case') }}">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.case_title.label }}<br>
+        {{ form.case_title(size=32) }}<br>
+        {{ form.case_description.label }}<br>
+        {{ form.case_description(rows=4, cols=50) }}<br>
+        {{ form.officer_id.label }}<br>
+        {{ form.officer_id(size=32) }}<br>
+        {{ form.submit() }}
+    </p>
+</form>
+{% endblock %}
