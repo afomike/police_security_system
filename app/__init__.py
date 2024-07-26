@@ -29,8 +29,10 @@ def load_user(user_id):
 # Import views after initializing the app
 from app import views
 
-# Check if the database file exists after initialization
-if os.path.exists(db_path):
-    print(f"Database file exists at: {db_path}")
+# Check if the database file exists
+if not os.path.exists(db_path):
+    with app.app_context():
+        db.create_all()
+        print(f"Database file created at: {db_path}")
 else:
-    print(f"Database file was not created at: {db_path}")
+    print(f"Database file exists at: {db_path}")
