@@ -5,3 +5,4 @@ Flask-Bcrypt==0.7.1
 Flask-Login==0.6.3
 Flask-WTF==0.15.1
 gunicorn
+SQLAlchemy==2.0.25
