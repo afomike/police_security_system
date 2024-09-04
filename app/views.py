@@ -1,7 +1,6 @@
 import bcrypt
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db
-import pandas as pd
 from flask import Flask, render_template, request
 from app.forms import RegistrationForm, LoginForm, PoliceRecordForm, CaseForm
 from app.models import User, PoliceRecord, Case
