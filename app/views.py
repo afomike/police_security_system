@@ -1,10 +1,8 @@
 import bcrypt
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db
-import joblib
 import pandas as pd
 from flask import Flask, render_template, request
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from app.forms import RegistrationForm, LoginForm, PoliceRecordForm, CaseForm
 from app.models import User, PoliceRecord, Case
 from flask_login import login_user, current_user, logout_user, login_required
