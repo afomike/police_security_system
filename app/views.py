@@ -1,6 +1,10 @@
 import bcrypt
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db
+import joblib
+import pandas as pd
+from flask import Flask, render_template, request
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from app.forms import RegistrationForm, LoginForm, PoliceRecordForm, CaseForm
 from app.models import User, PoliceRecord, Case
 from flask_login import login_user, current_user, logout_user, login_required
@@ -85,3 +89,68 @@ def view_cases():
 def report():
     report_data = db.session.query(Case.case_title, Case.case_description, PoliceRecord.officer_name).join(PoliceRecord).all()
     return render_template('report.html', title='Report', report=report_data)
+
+
+def load_incompatible_model(filepath):
+    import pickle
+    with open(filepath, 'rb') as f:
+        model = pickle.load(f, encoding='latin1')  # Use latin1 encoding to avoid certain compatibility checks
+    return model
+
+# model = load_incompatible_model('model/RF_model.pkl')
+
+# # Load model and encoders
+# model = joblib.load(f'model/RF_model.pkl')
+# one_hot_encoder = joblib.load(f'model/one_hot_encoder.pkl')
+# label_encoders = joblib.load(f'model/label_encoders.pkl')
+
+# Define preprocessing function
+# def preprocess_input(data):
+#     df = pd.DataFrame(data, index=[0])
+ 
+#     # Label Encoding for categorical features
+#     label_encode_features = ['AREA NAME', 'Vict Sex']
+#     for column in label_encode_features:
+#         if column in df.columns:
+#             le = label_encoders[column]
+#             known_classes = set(le.classes_)
+#             df[column] = df[column].apply(lambda x: le.transform([x])[0] if x in known_classes else -1)
+
+#     # One-Hot Encoding for categorical features
+#     one_hot_features = ['Weapon Desc', 'Status Desc']
+#     if all(feature in df.columns for feature in one_hot_features):
+#         one_hot_encoded = one_hot_encoder.transform(df[one_hot_features])
+#         one_hot_encoded_df = pd.DataFrame(one_hot_encoded, columns=one_hot_encoder.get_feature_names_out(one_hot_features))
+
+#         df = df.drop(columns=one_hot_features)
+#         df = pd.concat([df.reset_index(drop=True), one_hot_encoded_df.reset_index(drop=True)], axis=1)
+
+#     return df
+
+# @app.route('/predict', methods=['GET', 'POST'])
+# @login_required
+# def predict():
+#     if request.method == 'POST':
+#         try:
+#             data = request.form.to_dict()
+
+#             # Check for required fields
+#             required_fields = [
+#                 'AREA', 'AREA NAME', 'Rpt Dist No', 'Part 1-2', 'Crm Cd', 'Crm Cd Desc',
+#                 'Mocodes', 'Vict Age', 'Vict Sex', 'Premis Cd', 'Weapon Used Cd',
+#                 'Weapon Desc', 'Status Desc', 'Crm Cd 1', 'Crm Cd 2', 'Crm Cd 3',
+#                 'Crm Cd 4'
+#             ]
+            
+#             missing_fields = [field for field in required_fields if field not in data]
+#             if missing_fields:
+#                 return render_template('index.html', prediction=f"Missing required fields: {', '.join(missing_fields)}")
+
+#             preprocessed_data = preprocess_input(data)
+#             prediction = model.predict(preprocessed_data)
+#             prediction_result = prediction[0]
+#             return render_template('index.html', prediction=f'Predicted Crime Category: {prediction_result}')
+#         except Exception as e:
+#             return render_template('index.html', prediction=f"Error: {str(e)}")
+
+#     return render_template('prediction_form.html')

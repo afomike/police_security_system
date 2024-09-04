@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Crime Prediction{% endblock %}
+
+{% block content %}
+    <h2>Enter Crime Details for Prediction</h2>
+    <form action="{{ url_for('predict') }}" method="POST">
+        <label for="area">AREA:</label>
+        <input type="text" id="area" name="AREA" required><br>
+        
+        <label for="area_name">AREA NAME:</label>
+        <input type="text" id="area_name" name="AREA NAME" required><br>
+
+        <label for="rpt_dist_no">Rpt Dist No:</label>
+        <input type="number" id="rpt_dist_no" name="Rpt Dist No" required><br>
+
+        <label for="part_1_2">Part 1-2:</label>
+        <input type="text" id="part_1_2" name="Part 1-2" required><br>
+
+        <label for="crm_cd">Crm Cd:</label>
+        <input type="text" id="crm_cd" name="Crm Cd" required><br>
+
+        <label for="crm_cd_desc">Crm Cd Desc:</label>
+        <input type="text" id="crm_cd_desc" name="Crm Cd Desc" required><br>
+
+        <label for="mocodes">Mocodes:</label>
+        <input type="text" id="mocodes" name="Mocodes"><br>
+
+        <label for="vict_age">Vict Age:</label>
+        <input type="number" id="vict_age" name="Vict Age" required><br>
+
+        <label for="vict_sex">Vict Sex:</label>
+        <input type="text" id="vict_sex" name="Vict Sex" required><br>
+
+        <label for="premis_cd">Premis Cd:</label>
+        <input type="text" id="premis_cd" name="Premis Cd" required><br>
+
+        <label for="weapon_used_cd">Weapon Used Cd:</label>
+        <input type="text" id="weapon_used_cd" name="Weapon Used Cd"><br>
+
+        <label for="weapon_desc">Weapon Desc:</label>
+        <input type="text" id="weapon_desc" name="Weapon Desc"><br>
+
+        <label for="status_desc">Status Desc:</label>
+        <input type="text" id="status_desc" name="Status Desc" required><br>
+
+        <label for="crm_cd_1">Crm Cd 1:</label>
+        <input type="text" id="crm_cd_1" name="Crm Cd 1"><br>
+
+        <label for="crm_cd_2">Crm Cd 2:</label>
+        <input type="text" id="crm_cd_2" name="Crm Cd 2"><br>
+
+        <label for="crm_cd_3">Crm Cd 3:</label>
+        <input type="text" id="crm_cd_3" name="Crm Cd 3"><br>
+
+        <label for="crm_cd_4">Crm Cd 4:</label>
+        <input type="text" id="crm_cd_4" name="Crm Cd 4"><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <h3>{{ prediction }}</h3>
+    {% endif %}
+{% endblock %}

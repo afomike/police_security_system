@@ -16,7 +16,8 @@
                 <li><a href="{{ url_for('add_case') }}">Add Case</a></li>
                 <li><a href="{{ url_for('view_cases') }}">View Cases</a></li>
                 <li><a href="{{ url_for('report') }}">Report</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+
             {% else %}
                 <li><a href="{{ url_for('login') }}">Login</a></li>
                 <li><a href="{{ url_for('register') }}">Register</a></li>
